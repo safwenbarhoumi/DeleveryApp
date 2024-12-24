@@ -25,7 +25,7 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(title, key: Key('appBarTitle')), // Ajouter une clé ici
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -39,6 +39,7 @@ class DetailPage extends StatelessWidget {
             Text(
               title,
               style: TextStyle(fontSize: 24),
+              key: Key('titleText'), // Ajouter une clé ici
             ),
             SizedBox(height: 20),
             Text(
@@ -48,6 +49,7 @@ class DetailPage extends StatelessWidget {
             Text(
               description,
               style: TextStyle(fontSize: 18),
+              key: Key('descriptionText'), // Ajouter une clé ici
             ),
           ],
         ),
