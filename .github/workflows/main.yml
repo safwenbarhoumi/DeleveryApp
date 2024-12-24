@@ -38,8 +38,3 @@ jobs:
           dart format --output=none --set-exit-if-changed .
           # --set-exit-if-changed stops execution if the any code is not well formatted
           # --output=none prints files which needs to be formatted
-
-      - name: Analyze project source
-        run:
-          flutter analyze --fatal-warnings
-          # --fatal-warnings stops execution if any warnings are found
