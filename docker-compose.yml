@@ -1,0 +1,47 @@
+# version: '3.6'
+
+# services:
+#    app:
+#       build:
+#          context: '.'
+#          dockerfile: Dockerfile
+#       image: 'flutter'
+#       working_dir: '/app'
+#       depends_on:
+#          - emulator
+#       volumes:
+#          - './:/app'  # Current directory mounted to /app in the container
+
+#    emulator:
+#       image: us-docker.pkg.dev/android-emulator-268719/images/30-google-x64:30.1.2
+#       expose:
+#          - 8554
+#          - 5555
+#       devices:
+#          - '/dev/kvm:/dev/kvm'
+#       environment:  # Correctly formatted environment variables
+#          - SOME_ENV_VAR=value  # Replace with your actual variables
+#          - ANOTHER_ENV_VAR=value  # Add more as needed
+
+
+
+
+
+
+
+version: '3.6'
+
+services:
+  app:
+    build:
+      context: '.'
+      dockerfile: Dockerfile
+    image: 'flutter'
+    working_dir: '/app'
+    volumes:
+      - './:/app'  # Current directory mounted to /app in the container
+    ports:fl
+      - "3000:3000"  # Expose the Flutter web app port
+    command: /app/run.sh
+
+
