@@ -59,3 +59,4 @@ class DetailPage extends StatelessWidget {
 }
 
 // comment ajouter des clés pour les widgets dans les tests 
+//kdsjd
