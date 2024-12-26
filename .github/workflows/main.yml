@@ -42,3 +42,10 @@ jobs:
       # Create android apk
       - name: Build apk
         run: flutter build apk
+
+      # Build apk needs specific java version
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' # Use Eclipse Temurin distribution
+          java-version: '21'      # Match your local Java version
