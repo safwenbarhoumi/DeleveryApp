@@ -1,63 +1,52 @@
-# Note: In a yml each level is padded by 2 spaces
-name: Flutter
+# Note: Each level in a YAML file is indented by 2 spaces
+name: Flutter CI/CD
 
 on:
-  # Runs this action when you push on master
+  # Trigger the workflow on push to main branch or pull request to main branch
   push:
     branches: ["main"]
-  # Runs this when a PR against master is created
   pull_request:
     branches: ["main"]
 
 jobs:
   flutter_job:
-    # The machine, we can also use windows-latest or ubuntu-latest
-    # We are choosing macos-latest because we will be also building for iOS
+    # Use macOS for compatibility with both Android and iOS builds
     runs-on: macos-latest
 
     steps:
-      # Clones the project on the machine
-      - uses: actions/checkout@v4
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      # Installs flutter and related dependency on this machine
+      # Set up Flutter
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: "stable"
-          # flutter-version: '3.16.8'
-          # ^ If you want to use a specific version of flutter
+          channel: stable
+          flutter-version: '3.19.6' # Match your Flutter version
 
-      # Fetches proj dependencies from pub
-      - name: Install dependencies
-        run:
-          flutter pub get
-          # ^ If you want to use a specific version of flutter
-
-      - name: Verify formatting
-        run:
-          dart format --output=none --set-exit-if-changed .
-          # --set-exit-if-changed stops execution if the any code is not well formatted
-          # --output=none prints files which needs to be formatted
-
-      # Build apk needs specific java version
-      - name: Set up JDK
-          uses: actions/setup-java@v3
-            with:
-              distribution: 'temurin' # Use Eclipse Temurin distribution
-              java-version: '21'      # Match your local Java version
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '<3.19.6>' # Match your local Flutter version
-
+      # Install project dependencies
       - name: Install dependencies
         run: flutter pub get
 
+      # Verify code formatting
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      # Set up Java JDK for Gradle
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: '21' # Match your local Java version
+
+      # Clean the build environment
       - name: Clean build
         run: flutter clean
 
-      # Create android apk
-      - name: Build apk
+      # Build the APK
+      - name: Build APK
         run: flutter build apk
+
 
 
