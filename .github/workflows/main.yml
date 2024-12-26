@@ -39,13 +39,25 @@ jobs:
           # --set-exit-if-changed stops execution if the any code is not well formatted
           # --output=none prints files which needs to be formatted
 
+      # Build apk needs specific java version
+      - name: Set up JDK
+          uses: actions/setup-java@v3
+            with:
+              distribution: 'temurin' # Use Eclipse Temurin distribution
+              java-version: '21'      # Match your local Java version
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '<3.19.6>' # Match your local Flutter version
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Clean build
+        run: flutter clean
+
       # Create android apk
       - name: Build apk
         run: flutter build apk
 
-      # Build apk needs specific java version
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin' # Use Eclipse Temurin distribution
-          java-version: '21'      # Match your local Java version
+
