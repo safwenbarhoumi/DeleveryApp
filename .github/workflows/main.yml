@@ -65,3 +65,10 @@ jobs:
             --name grafana \
             -p 3000:3000 \
             grafana/grafana
+
+      - name: Start Alertmanager
+        run: |
+          docker run -d \
+          --name alertmanager \
+          -p 9093:9093 \
+          prom/alertmanager
