@@ -11,7 +11,7 @@ on:
 jobs:
   flutter_job:
     # Use macOS for compatibility with both Android and iOS builds
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       # Checkout the repository
