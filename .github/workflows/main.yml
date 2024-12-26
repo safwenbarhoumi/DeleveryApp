@@ -48,6 +48,17 @@ jobs:
       - name: Build APK
         run: flutter build apk
 
+  monitoring:
+    runs-on: ubuntu-latest
+    needs: flutter_job
+    steps:
+      - name: Start Prometheus
+        run: |
+          docker run -d \
+            --name prometheus \
+            -p 9090:9090 \
+            prom/prometheus
+
       - name: Start Grafana
         run: |
           docker run -d \
