@@ -23,7 +23,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: '3.19.6' # Match your Flutter version
+          flutter-version: "3.19.6" # Match your Flutter version
 
       # Install project dependencies
       - name: Install dependencies
@@ -38,7 +38,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: temurin
-          java-version: '21' # Match your local Java version
+          java-version: "21" # Match your local Java version
 
       # Clean the build environment
       - name: Clean build
@@ -48,5 +48,9 @@ jobs:
       - name: Build APK
         run: flutter build apk
 
-
-
+      - name: Start Grafana
+        run: |
+          docker run -d \
+            --name grafana \
+            -p 3000:3000 \
+            grafana/grafana
